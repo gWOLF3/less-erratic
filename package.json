@@ -1,0 +1,22 @@
+{
+  "name": "less-erratic",
+  "version": "1.0.0",
+  "description": "a fork of dan connelly's erratic, with better error handling",
+  "main": "erratic.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "node test_erratic.js"
+  },
+  "keywords": [
+    "erratic",
+    "bitcoin",
+    "bnf"
+  ],
+  "author": "gw0lf3",
+  "license": "ISC",
+  "dependencies": {
+    "prettybnf": "^0.1.3"
+  }
+}

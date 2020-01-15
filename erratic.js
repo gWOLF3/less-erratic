@@ -1,0 +1,43 @@
+// Copyright 2012 Daniel Connelly.
+// Released under the Simplified (2-clause) BSD License.
+// See http://dhconnelly.com/erratic or the LICENSE file for more details.
+
+(function (exports, imports) {
+'use strict';
+
+exports.version = '0.1.0';
+exports.parse = parse;
+exports.generate = generate;
+
+var prettybnf = imports.prettybnf;
+
+function extract(prop, o) {
+    return o[prop];
+}
+
+function parse(grammar) {
+    var ast = prettybnf.parse(grammar);
+    var rules = {};
+    ast.productions.forEach(function (prod) {
+        rules[prod.lhs.text] = prod.rhs.map(extract.bind(null, 'terms'));
+    });
+    console.log(rules)
+    return rules;
+}
+
+function choose(things) {
+     console.log(things[Math.floor(Math.random() * things.length )])
+     return (things == undefined ? [{ type: 'terminal', text: 'OP_2' }] : things[Math.floor(Math.random() * things.length )])
+}
+
+function generateTerm(rules, term) {
+    return (term.type === 'terminal') ? term.text : generate(rules, term.text);
+}
+
+function generate(rules, rule) {
+    return choose(rules[rule]).map(generateTerm.bind(null, rules)).join(' ');
+}
+
+}(typeof exports === 'undefined' ? this.erratic = {} : exports, {
+    prettybnf: this.prettybnf || require('prettybnf')
+}));
