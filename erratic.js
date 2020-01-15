@@ -21,12 +21,10 @@ function parse(grammar) {
     ast.productions.forEach(function (prod) {
         rules[prod.lhs.text] = prod.rhs.map(extract.bind(null, 'terms'));
     });
-    console.log(rules)
     return rules;
 }
 
 function choose(things) {
-     console.log(things[Math.floor(Math.random() * things.length )])
      return (things == undefined ? [{ type: 'terminal', text: 'OP_2' }] : things[Math.floor(Math.random() * things.length )])
 }
 
